@@ -9,7 +9,7 @@ export class CheckboxTakeHomeTestStack extends cdk.Stack {
 		super(scope, id, props);
 
 		// Create the appsync api
-		const api = new appsync.GraphqlApi(this, 'Api', {
+		const api = new appsync.GraphqlApi(this, 'TaskApi', {
 			name: 'checkbox-task-appsync-api',
 			schema: appsync.Schema.fromAsset('graphql/schema.graphql'),
 			authorizationConfig: {
@@ -26,9 +26,9 @@ export class CheckboxTakeHomeTestStack extends cdk.Stack {
 		const vpc = new ec2.Vpc(this, 'TaskAppVPC');
 
 		// Create the aurora db cluster; set the engine to postgresql
-		const cluster = new rds.ServerlessCluster(this, 'AuroraTaskCluster', {
+		const cluster = new rds.ServerlessCluster(this, 'TaskDBCluster', {
 			engine: rds.DatabaseClusterEngine.AURORA_POSTGRESQL,
-			parameterGroup: rds.ParameterGroup.fromParameterGroupName(this, 'ParameterGroup', 'default.aurora-postgresql13'),
+			parameterGroup: rds.ParameterGroup.fromParameterGroupName(this, 'ParameterGroup', 'aurora-postgresql10'),
 			defaultDatabaseName: 'TaskDB',
 			vpc,
 			scaling: { autoPause: cdk.Duration.seconds(300) }
