@@ -1,16 +1,22 @@
-import * as cdk from 'aws-cdk-lib';
-import { Construct } from 'constructs';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
+import * as cdk from '@aws-cdk/core';
+import * as appsync from '@aws-cdk/aws-appsync';
 
 export class CheckboxTakeHomeTestStack extends cdk.Stack {
-	constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+	constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
 		super(scope, id, props);
 
-		// The code that defines your stack goes here
-
-		// example resource
-		// const queue = new sqs.Queue(this, 'CheckboxTakeHomeTestQueue', {
-		//   visibilityTimeout: cdk.Duration.seconds(300)
-		// });
+		// Create the AppSync API
+		const api = new appsync.GraphqlApi(this, 'Api', {
+			name: 'checkbox-task-appsync-api',
+			schema: appsync.Schema.fromAsset('graphql/schema.graphql'),
+			authorizationConfig: {
+				defaultAuthorization: {
+					authorizationType: appsync.AuthorizationType.API_KEY,
+					apiKeyConfig: {
+						expires: cdk.Expiration.after(cdk.Duration.days(365))
+					}
+				},
+			},
+		});
 	}
 }
