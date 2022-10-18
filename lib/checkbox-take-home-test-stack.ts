@@ -75,5 +75,16 @@ export class CheckboxTakeHomeTestStack extends cdk.Stack {
 			typeName: 'Mutation',
 			fieldName: 'deleteTask'
 		});
+
+		// CFN Outputs
+		new cdk.CfnOutput(this, 'AppSyncAPIURL', {
+			value: api.graphqlUrl
+		});
+		new cdk.CfnOutput(this, 'AppSyncAPIKey', {
+			value: api.apiKey || ''
+		});
+		new cdk.CfnOutput(this, 'ProjectRegion', {
+			value: this.region
+		});
 	}
 }
