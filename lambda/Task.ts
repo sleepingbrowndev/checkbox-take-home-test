@@ -2,9 +2,9 @@ type Task = {
     id: string;
     name: string;
     description: string;
-    dueDate: string;
-    createdAt: string;
-    updatedAt: string;
+    duedate: string;
+    createdat: string;
+    updatedat: string;
     status: string;
 }
 

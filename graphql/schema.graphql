@@ -2,9 +2,9 @@ type Task {
   id: String!
   name: String!
   description: String!
-  dueDate: String!
-  createdAt: String!
-  updatedAt: String!
+  duedate: String!
+  createdat: String!
+  updatedat: String!
   status: String!
 }
 
@@ -12,9 +12,9 @@ input CreateTaskInput {
   id: String
   name: String!
   description: String!
-  dueDate: String!
-  createdAt: String
-  updatedAt: String
+  duedate: String!
+  createdat: String
+  updatedat: String
   status: String!
 }
 
@@ -22,8 +22,8 @@ input UpdateTaskInput {
   id: String!
   name: String!
   description: String!
-  dueDate: String!
-  updatedAt: String
+  duedate: String!
+  updatedat: String
   status: String
 }
 
